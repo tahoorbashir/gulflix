@@ -317,7 +317,7 @@ const Watch = () => {
           src={
             type === "movie"
               ? `${STREAM_URL_VID}/embed/${type}/${id}`
-              : `${STREAM_URL_AGG}/embed/${type}/${id}/${season}/${episode}`
+              : `${STREAM_URL_VID}/embed/${type}/${id}/${season}/${episode}`
           }
           className={styles.iframe}
           allowFullScreen
@@ -347,7 +347,7 @@ const Watch = () => {
           src={
             type === "movie"
               ? `${STREAM_URL_AGG}/embed/${type}/?id=${id}`
-              : `${STREAM_URL_VID}/embed/${type}/?id=${id}/${season}/${episode}`
+              : `${STREAM_URL_AGG}/embed/${type}/?id=${id}/${season}/${episode}`
           }
           className={styles.iframe}
           allowFullScreen
@@ -364,6 +364,7 @@ const Watch = () => {
           }
           className={styles.iframe}
           allow="accelerometer; autoplay; encrypted-media; gyroscope;"
+          allowFullScreen
           referrerPolicy="origin"
         ></iframe>
       ) : null}
