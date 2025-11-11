@@ -178,7 +178,7 @@ const SettingsPage = ({
          </Link>
           {/* <Link href="/contact">Contact Us</Link> */}
         </div>
-        <h1>Links</h1>
+        {/*<h1>Links</h1>
         <div className={styles.group}>
           <Link href={"https://github.com/inkosiyehacker"}>
             <FaGithub /> Github
@@ -186,7 +186,7 @@ const SettingsPage = ({
           <Link href={"/"}>
             <FaGlobe /> Website
           </Link>
-        </div>
+        </div> */}
       </div>
     </div>
   );

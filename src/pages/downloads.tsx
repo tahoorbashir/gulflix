@@ -24,7 +24,7 @@ const LoginPage = () => {
           src="/images/logo.svg"
           alt="logo"
           data-tooltip-id="tooltip"
-          data-tooltip-content="Velzorix"
+          data-tooltip-content="GulFlix"
         />
     //   <p>Your Personal Streaming Oasis</p>
       </div>

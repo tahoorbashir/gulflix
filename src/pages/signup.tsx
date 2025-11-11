@@ -22,7 +22,7 @@ const SignupPage = () => {
           src="/images/logo.svg"
           alt="logo"
           data-tooltip-id="tooltip"
-          data-tooltip-content="Velzorix"
+          data-tooltip-content="GulFlix"
         />
         <p>Your Personal Streaming Oasis</p>
       </div>
@@ -58,7 +58,7 @@ const SignupPage = () => {
           </>
         </div>
         <h4>
-          Already a Velzorix member!{" "}
+          Already a GulFlix member!{" "}
           <Link href="/login" className={styles.highlight}>
             Login
           </Link>

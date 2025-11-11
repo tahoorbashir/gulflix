@@ -45,12 +45,12 @@ export const signupUserManual = async ({ username, email, password }: any) => {
         const colRef = doc(db, "users", user.uid);
         await setDoc(colRef, { username: username });
         toast.dismiss(loadingToast);
-        toast.success("Cloud: User created! Welcome to Velzorix club");
+        toast.success("Cloud: User created! Welcome to GulFlix club");
         return true;
       } catch (error: any) {
         if (error.message.includes("already-in-use")) {
           toast.dismiss(loadingToast);
-          toast.error("Cloud: user is already a Velzorix member");
+          toast.error("Cloud: user is already a GulFlix member");
         } else {
           console.log({ error });
           toast.dismiss(loadingToast);

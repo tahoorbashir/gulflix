@@ -8,21 +8,21 @@ const Disclaimer = () => {
           src="/images/logo.svg"
           alt="logo"
           data-tooltip-id="tooltip"
-          data-tooltip-content="Velzorix"
+          data-tooltip-content="GulFlix"
         />
-      // <p>Your Personal Streaming Oasis</p>
+        <p>Your Personal Streaming Oasis</p>
       </div>
       <div className={styles.settings}>
         <h1>Disclaimer</h1>
         <div className={styles.group2}>
           <p>
-            Velzorix or Velzorix player does not host any files, it merely links to 3rd party services.
+            GulFlix or GulFlix player does not host any files, it merely links to 3rd party services.
           </p>
           <p>
             Legal issues should be taken up with the file hosts and providers.
           </p>
           <p>
-            Velzorix or Velzorix player is not responsible for any media files shown by the video
+            GulFlix or GulFlix player is not responsible for any media files shown by the video
             providers.
           </p>
         </div>

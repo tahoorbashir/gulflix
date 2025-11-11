@@ -16,7 +16,7 @@ export const getBookmarks = (userId: any) => {
     // console.log(await fetchFbWatchlist({ userID: userId }));
     return fetchFbWatchlist({ userID: userId });
   } else {
-    const values: any = localStorage.getItem("VelzorixStreamWatchlist");
+    const values: any = localStorage.getItem("GulFlixStreamWatchlist");
     return JSON.parse(values);
   }
   return {};
@@ -31,7 +31,7 @@ export const setBookmarks = ({ userId = null, type, id }: any) => {
       values[type] = values[type].reverse();
       values[type]?.push(id);
       values[type] = values[type].reverse();
-      localStorage.setItem("VelzorixStreamWatchlist", JSON.stringify(values));
+      localStorage.setItem("GulFlixStreamWatchlist", JSON.stringify(values));
     }
   }
 };
@@ -44,7 +44,7 @@ export const removeBookmarks = ({ userId = null, type, id }: any) => {
     if (values[type]?.includes(id)) {
       values[type] = values[type].filter((ele: any) => ele !== id); // Update the array after filtering
       return localStorage.setItem(
-        "VelzorixStreamWatchlist",
+        "GulFlixStreamWatchlist",
         JSON.stringify(values),
       );
     }

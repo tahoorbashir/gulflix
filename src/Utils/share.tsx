@@ -1,6 +1,6 @@
 export const navigatorShare = async ({ text, url }: any) => {
   const shareData = {
-    title: "VZXStream",
+    title: "GulFlix",
     text: text,
     url: url,
   };

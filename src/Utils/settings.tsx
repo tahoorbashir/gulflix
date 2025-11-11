@@ -1,5 +1,5 @@
 export const getSettings = () => {
-  const values: any = localStorage.getItem("VelzorixStreamSettings");
+  const values: any = localStorage.getItem("GulFlixStreamSettings");
   return JSON.parse(values);
 };
 
@@ -8,5 +8,5 @@ export const setSettings = ({ values }: any) => {
   //   theme: "", mode: "", ascent_color: ""
   // };
   // values[type] = value;
-  localStorage.setItem("VelzorixStreamSettings", JSON.stringify(values));
+  localStorage.setItem("GulFlixStreamSettings", JSON.stringify(values));
 };

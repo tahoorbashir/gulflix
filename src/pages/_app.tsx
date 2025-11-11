@@ -46,11 +46,11 @@ export default function App({ Component, pageProps }: any) {
   return (
     <>
       <Head>
-        <title>Velzorix</title>
+        <title>GulFlix</title>
         <meta name="description" content="Your Personal Streaming Oasis" />
         <meta
           name="keywords"
-          content="movie, streaming, tv, Velzorix, stream, movie app, tv shows, movie download"
+          content="movie, streaming, tv, GulFlix, stream, movie app, tv shows, movie download"
         />
         <meta
           name="google-site-verification"
@@ -61,7 +61,7 @@ export default function App({ Component, pageProps }: any) {
         <meta name="theme-color" content="#f4f7fe" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        <meta name="apple-mobile-web-app-title" content="Velzorix" />
+        <meta name="apple-mobile-web-app-title" content="GulFlix" />
         <link rel="icon" href="/images/logo512.png" />
         <link rel="apple-touch-icon" href="/images/logo512.png" />
         <meta name="mobile-web-app-capable" content="yes" />

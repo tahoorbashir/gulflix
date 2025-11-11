@@ -44,13 +44,13 @@ const Watch = () => {
 
   useEffect(() => {
     if (
-      localStorage.getItem("VelzorixStreamEmbedMode") !== undefined &&
-      localStorage.getItem("VelzorixStreamEmbedMode") !== null
+      localStorage.getItem("GulFlixStreamEmbedMode") !== undefined &&
+      localStorage.getItem("GulFlixStreamEmbedMode") !== null
     )
-      setEmbedMode(JSON.parse(localStorage.getItem("VelzorixStreamEmbedMode") || "false"));
+      setEmbedMode(JSON.parse(localStorage.getItem("GulFlixStreamEmbedMode") || "false"));
     else setEmbedMode(false);
 
-    const latestAgg: any = localStorage.getItem("VelzorixStreamLatestAgg");
+    const latestAgg: any = localStorage.getItem("GulFlixStreamLatestAgg");
     if (latestAgg !== null && latestAgg !== undefined) setSource(latestAgg);
 
     setLoading(true);
@@ -103,7 +103,7 @@ const Watch = () => {
 
   useEffect(() => {
     if (embedMode !== undefined && embedMode !== null)
-      localStorage.setItem("VelzorixStreamEmbedMode", embedMode);
+      localStorage.setItem("GulFlixStreamEmbedMode", embedMode);
   }, [embedMode]);
 
   useEffect(() => {
@@ -197,7 +197,7 @@ const Watch = () => {
             value={source}
             onChange={(e) => {
               setSource(e.target.value);
-              localStorage.setItem("VelzorixStreamLatestAgg", e.target.value);
+              localStorage.setItem("GulFlixStreamLatestAgg", e.target.value);
             }}
           >
             <option value="EMB">Server : 1 (ads)</option>
@@ -242,7 +242,7 @@ const Watch = () => {
           value={embedMode}
           onChange={(e) => {
             setEmbedMode(JSON.parse(e.target.value));
-            localStorage.setItem("VelzorixStreamEmbedMode", e.target.value);
+            localStorage.setItem("GulFlixStreamEmbedMode", e.target.value);
           }}
         >
           <option value="true">Embed Mode</option>
