@@ -359,8 +359,8 @@ const Watch = () => {
         <iframe
           src={
             type === "movie"
-              ? `${STREAM_URL_NEXT}/${type}/${id}?fullscreen=true`
-              : `${STREAM_URL_NEXT}/${type}/${id}/${season}/${episode}?fullscreen=true`
+              ? `${STREAM_URL_NEXT}/${type}/${id}?fullscreen=true&cast=hide`
+              : `${STREAM_URL_NEXT}/${type}/${id}/${season}/${episode}?fullscreen=true&cast=hide`
           }
           className={styles.iframe}
           allow="accelerometer; autoplay; encrypted-media; gyroscope;"
