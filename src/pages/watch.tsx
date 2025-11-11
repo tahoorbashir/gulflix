@@ -39,15 +39,19 @@ const Watch = () => {
 
   if (type === null && params.get("id") !== null) setType(params.get("type"));
   if (id === null && params.get("id") !== null) setId(params.get("id"));
-  if (season === null && params.get("season") !== null) setSeason(params.get("season"));
-  if (episode === null && params.get("episode") !== null) setEpisode(params.get("episode"));
+  if (season === null && params.get("season") !== null)
+    setSeason(params.get("season"));
+  if (episode === null && params.get("episode") !== null)
+    setEpisode(params.get("episode"));
 
   useEffect(() => {
     if (
       localStorage.getItem("GulFlixStreamEmbedMode") !== undefined &&
       localStorage.getItem("GulFlixStreamEmbedMode") !== null
     )
-      setEmbedMode(JSON.parse(localStorage.getItem("GulFlixStreamEmbedMode") || "false"));
+      setEmbedMode(
+        JSON.parse(localStorage.getItem("GulFlixStreamEmbedMode") || "false"),
+      );
     else setEmbedMode(false);
 
     const latestAgg: any = localStorage.getItem("GulFlixStreamLatestAgg");
@@ -71,7 +75,10 @@ const Watch = () => {
       });
       setseasonData(seasonData);
       seasonData?.episodes?.length > 0 &&
-        setMaxEpisodes(seasonData?.episodes[seasonData?.episodes?.length - 1]?.episode_number);
+        setMaxEpisodes(
+          seasonData?.episodes[seasonData?.episodes?.length - 1]
+            ?.episode_number,
+        );
       setMinEpisodes(seasonData?.episodes[0]?.episode_number);
       if (parseInt(episode) >= maxEpisodes - 1) {
         var nextseasonData = await axiosFetch({
@@ -79,7 +86,8 @@ const Watch = () => {
           id: id,
           season: parseInt(season) + 1,
         });
-        nextseasonData?.episodes?.length > 0 && setNextSeasonMinEpisodes(nextseasonData?.episodes[0]?.episode_number);
+        nextseasonData?.episodes?.length > 0 &&
+          setNextSeasonMinEpisodes(nextseasonData?.episodes[0]?.episode_number);
       }
     };
     if (type === "tv") fetch();
@@ -121,7 +129,9 @@ const Watch = () => {
 
         if (res?.data?.sources?.length > 0) {
           setNonEmbedSources(res?.data?.sources);
-          res?.data?.sources?.length > 0 ? setNonEmbedURL(res?.data?.sources[0]?.url) : null;
+          res?.data?.sources?.length > 0
+            ? setNonEmbedURL(res?.data?.sources[0]?.url)
+            : null;
           setnonEmbedCaptions(res?.data?.captions);
           setnonEmbedFormat(res?.data?.format);
           clearTimeout(autoEmbedMode);
@@ -135,13 +145,19 @@ const Watch = () => {
 
   function handleBackward() {
     if (episode > minEpisodes)
-      push(`/watch?type=tv&id=${id}&season=${season}&episode=${parseInt(episode) - 1}`);
+      push(
+        `/watch?type=tv&id=${id}&season=${season}&episode=${parseInt(episode) - 1}`,
+      );
   }
   function handleForward() {
     if (episode < maxEpisodes)
-      push(`/watch?type=tv&id=${id}&season=${season}&episode=${parseInt(episode) + 1}`);
+      push(
+        `/watch?type=tv&id=${id}&season=${season}&episode=${parseInt(episode) + 1}`,
+      );
     else if (parseInt(season) + 1 <= maxSeason)
-      push(`/watch?type=tv&id=${id}&season=${parseInt(season) + 1}&episode=${nextSeasonMinEpisodes}`);
+      push(
+        `/watch?type=tv&id=${id}&season=${parseInt(season) + 1}&episode=${nextSeasonMinEpisodes}`,
+      );
   }
 
   // ✅ ACTIVE ENV VARIABLES
@@ -162,20 +178,30 @@ const Watch = () => {
   return (
     <div className={styles.watch}>
       <div onClick={() => back()} className={styles.backBtn}>
-        <IoReturnDownBack data-tooltip-id="tooltip" data-tooltip-content="go back" />
+        <IoReturnDownBack
+          data-tooltip-id="tooltip"
+          data-tooltip-content="go back"
+        />
       </div>
 
       <div className={styles.episodeControl}>
         {type === "tv" ? (
           <>
             <div ref={backBtn} onClick={() => episode > 1 && handleBackward()}>
-              <FaBackwardStep className={`${episode <= minEpisodes ? styles.inactive : null}`} />
+              <FaBackwardStep
+                className={`${episode <= minEpisodes ? styles.inactive : null}`}
+              />
             </div>
             <div
               ref={nextBtn}
-              onClick={() => (episode < maxEpisodes || parseInt(season) + 1 <= maxSeason) && handleForward()}
+              onClick={() =>
+                (episode < maxEpisodes || parseInt(season) + 1 <= maxSeason) &&
+                handleForward()
+              }
             >
-              <FaForwardStep className={`${episode >= maxEpisodes && season >= maxSeason ? styles.inactive : null}`} />
+              <FaForwardStep
+                className={`${episode >= maxEpisodes && season >= maxSeason ? styles.inactive : null}`}
+              />
             </div>
           </>
         ) : null}
@@ -185,7 +211,14 @@ const Watch = () => {
       </div>
 
       {watchDetails && (
-        <WatchDetails id={id} type={type} data={data} season={season} episode={episode} setWatchDetails={setWatchDetails} />
+        <WatchDetails
+          id={id}
+          type={type}
+          data={data}
+          season={season}
+          episode={episode}
+          setWatchDetails={setWatchDetails}
+        />
       )}
 
       <div className={styles.watchSelects}>
@@ -253,7 +286,12 @@ const Watch = () => {
       <div className={`${styles.loader} skeleton`}>Loading</div>
 
       {embedMode === false && nonEmbedURL !== "" && (
-        <Player option={{ url: nonEmbedURL }} format={nonEmbedFormat} captions={nonEmbedCaptions} className={styles.videoPlayer} />
+        <Player
+          option={{ url: nonEmbedURL }}
+          format={nonEmbedFormat}
+          captions={nonEmbedCaptions}
+          className={styles.videoPlayer}
+        />
       )}
 
       {/* ✅ ACTIVE IFRAME OPTIONS */}
@@ -261,7 +299,11 @@ const Watch = () => {
       {source === "EMB" && id && embedMode === true ? (
         <iframe
           scrolling="no"
-          src={type === "movie" ? `${STREAM_URL_EMB}/embed/${type}/${id}` : `${STREAM_URL_EMB}/embed/${type}/${id}/${season}/${episode}`}
+          src={
+            type === "movie"
+              ? `${STREAM_URL_EMB}/embed/${type}/${id}`
+              : `${STREAM_URL_EMB}/embed/${type}/${id}/${season}/${episode}`
+          }
           className={styles.iframe}
           allowFullScreen
           allow="accelerometer; autoplay; encrypted-media; gyroscope;"
@@ -272,7 +314,11 @@ const Watch = () => {
       {source === "VID" && id && embedMode === true ? (
         <iframe
           scrolling="no"
-          src={type === "movie" ? `${STREAM_URL_VID}/embed/${type}/${id}` : `${STREAM_URL_AGG}/embed/${type}/${id}/${season}/${episode}`}
+          src={
+            type === "movie"
+              ? `${STREAM_URL_VID}/embed/${type}/${id}`
+              : `${STREAM_URL_AGG}/embed/${type}/${id}/${season}/${episode}`
+          }
           className={styles.iframe}
           allowFullScreen
           allow="accelerometer; autoplay; encrypted-media; gyroscope;"
@@ -283,7 +329,11 @@ const Watch = () => {
       {source === "ANY" && id && embedMode === true ? (
         <iframe
           scrolling="no"
-          src={type === "movie" ? `${STREAM_URL_ANY}/embed/movie/${id}` : `${STREAM_URL_ANY}/embed/tv/${id}/${season}/${episode}`}
+          src={
+            type === "movie"
+              ? `${STREAM_URL_ANY}/embed/movie/${id}`
+              : `${STREAM_URL_ANY}/embed/tv/${id}/${season}/${episode}`
+          }
           className={styles.iframe}
           allowFullScreen
           allow="accelerometer; autoplay; encrypted-media; gyroscope;"
@@ -291,11 +341,14 @@ const Watch = () => {
         ></iframe>
       ) : null}
 
-  
       {source === "AGG" && id && embedMode === true ? (
         <iframe
           scrolling="no"
-          src={type === "movie" ? `${STREAM_URL_AGG}/embed/${type}/?id=${id}` : `${STREAM_URL_VID}/embed/${type}/?id=${id}/${season}/${episode}`}
+          src={
+            type === "movie"
+              ? `${STREAM_URL_AGG}/embed/${type}/?id=${id}`
+              : `${STREAM_URL_VID}/embed/${type}/?id=${id}/${season}/${episode}`
+          }
           className={styles.iframe}
           allowFullScreen
           allow="accelerometer; autoplay; encrypted-media; gyroscope;"
@@ -303,14 +356,18 @@ const Watch = () => {
         ></iframe>
       ) : null}
       {source === "NEXT" && id && embedMode === true ? (
-        <iframe 
-          src={type === "movie" ? `${STREAM_URL_NEXT}/${type}/${id}` : `${STREAM_URL_NEXT}/${type}/${id}/${season}/${episode}`}
+        <iframe
+          src={
+            type === "movie"
+              ? `${STREAM_URL_NEXT}/${type}/${id}`
+              : `${STREAM_URL_NEXT}/${type}/${id}/${season}/${episode}`
+          }
           className={styles.iframe}
           allow="accelerometer; autoplay; encrypted-media; gyroscope;"
           referrerPolicy="origin"
-          ></iframe>
+        ></iframe>
       ) : null}
-  {/* ❌ COMMENTED IFRAME BLOCKS (kept in code, but disabled) */}
+      {/* ❌ COMMENTED IFRAME BLOCKS (kept in code, but disabled) */}
 
       {/*source === "PRO" && id && embedMode === true ? (
         <iframe src={`${STREAM_URL_PRO}/embed/${type}/${id}`} className={styles.iframe}></iframe>
@@ -319,7 +376,6 @@ const Watch = () => {
       ... etc (other commented blocks)
 
       */}
-
     </div>
   );
 };

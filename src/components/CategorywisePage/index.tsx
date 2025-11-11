@@ -62,11 +62,11 @@ const CategorywisePage = ({ categoryDiv, categoryPage = null }: any) => {
                 ? categoryType === "tv"
                   ? "first_air_date.desc"
                   : "primary_release_date.desc"
-              : category === "trending"
-                ? "popularity.desc"
-              : category === "topRated"
-                ? "vote_count.desc"
-              : undefined,
+                : category === "trending"
+                  ? "popularity.desc"
+                  : category === "topRated"
+                    ? "vote_count.desc"
+                    : undefined,
             genreKeywords: "210024,",
             page: currentPage,
           });
@@ -79,11 +79,11 @@ const CategorywisePage = ({ categoryDiv, categoryPage = null }: any) => {
                 ? categoryType === "tv"
                   ? "first_air_date.desc"
                   : "primary_release_date.desc"
-              : category === "trending"
-                ? "popularity.desc"
-              : category === "topRated"
-                ? "vote_count.desc"
-              : undefined,
+                : category === "trending"
+                  ? "popularity.desc"
+                  : category === "topRated"
+                    ? "vote_count.desc"
+                    : undefined,
             genreKeywords: ",",
             country: "KR",
             page: currentPage,
@@ -199,7 +199,9 @@ const CategorywisePage = ({ categoryDiv, categoryPage = null }: any) => {
           return <MovieCardSmall data={ele} media_type={categoryType} />;
         })}
         {data?.length === 0 &&
-          dummyList.map((ele) => <Skeleton key={ele} className={styles.loading} />)}
+          dummyList.map((ele) => (
+            <Skeleton key={ele} className={styles.loading} />
+          ))}
       </div>
 
       <ReactPaginate

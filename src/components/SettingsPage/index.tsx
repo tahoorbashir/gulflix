@@ -173,9 +173,7 @@ const SettingsPage = ({
           >
             Disclaimer
           </Link>
-         <Link href="mailto:velzorix@gmail.com">
-           Contact Us
-         </Link>
+          <Link href="mailto:velzorix@gmail.com">Contact Us</Link>
           {/* <Link href="/contact">Contact Us</Link> */}
         </div>
         {/*<h1>Links</h1>

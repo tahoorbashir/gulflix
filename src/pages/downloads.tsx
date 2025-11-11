@@ -26,7 +26,7 @@ const LoginPage = () => {
           data-tooltip-id="tooltip"
           data-tooltip-content="GulFlix"
         />
-    //   <p>Your Personal Streaming Oasis</p>
+        // <p>Your Personal Streaming Oasis</p>
       </div>
       <div className={styles.settings}>
         <h1>Downloads</h1>
