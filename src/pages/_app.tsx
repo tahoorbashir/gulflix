@@ -1,36 +1,47 @@
 import "@/styles/globals.scss";
-import Layout from "@/components/Layout";
-import Head from "next/head";
-import { Toaster } from "sonner";
 import "@/styles/checkbox.scss";
-import "react-tooltip/dist/react-tooltip.css";
-import { Tooltip } from "react-tooltip";
-import Router from "next/router";
-import { useState, useEffect } from "react";
-import NProgress from "nprogress";
 import "@/styles/nprogress.scss";
+import "react-tooltip/dist/react-tooltip.css";
 import "react-loading-skeleton/dist/skeleton.css";
-import Script from "next/script"; // ✅ Import Next.js Script component
+
+import { useEffect, useState } from "react";
+import Router from "next/router";
+import Head from "next/head";
+import Script from "next/script";
+import NProgress from "nprogress";
+import { Toaster } from "sonner";
+import { Tooltip } from "react-tooltip";
+import Layout from "@/components/Layout";
 
 export default function App({ Component, pageProps }: any) {
   const [isLoading, setIsLoading] = useState(false);
-  NProgress.configure({ showSpinner: false });
 
   useEffect(() => {
-    Router.events.on("routeChangeStart", (url) => {
+    NProgress.configure({ showSpinner: false });
+
+    const handleStart = () => {
       setIsLoading(true);
       NProgress.start();
-    });
-
-    Router.events.on("routeChangeComplete", (url) => {
+    };
+    const handleComplete = () => {
       setIsLoading(false);
-      NProgress.done(false);
-    });
-
-    Router.events.on("routeChangeError", (url) => {
+      NProgress.done();
+    };
+    const handleError = () => {
       setIsLoading(false);
-    });
-  }, [Router]);
+      NProgress.done();
+    };
+
+    Router.events.on("routeChangeStart", handleStart);
+    Router.events.on("routeChangeComplete", handleComplete);
+    Router.events.on("routeChangeError", handleError);
+
+    return () => {
+      Router.events.off("routeChangeStart", handleStart);
+      Router.events.off("routeChangeComplete", handleComplete);
+      Router.events.off("routeChangeError", handleError);
+    };
+  }, []);
 
   return (
     <>
@@ -39,7 +50,7 @@ export default function App({ Component, pageProps }: any) {
         <meta name="description" content="Your Personal Streaming Oasis" />
         <meta
           name="keywords"
-          content="movie, streaming, tv, Velzorix, stream. movie app, tv shows, movie download"
+          content="movie, streaming, tv, Velzorix, stream, movie app, tv shows, movie download"
         />
         <meta
           name="google-site-verification"
@@ -58,39 +69,46 @@ export default function App({ Component, pageProps }: any) {
         <link rel="shortcut icon" href="/images/logo512.png" />
       </Head>
 
-      {/* ✅ Monetag Global Ad Script */}
-      <script>
-(function(slw){
-var d = document,
-    s = d.createElement('script'),
-    l = d.scripts[d.scripts.length - 1];
-s.settings = slw || {};
-s.src = "\/\/impeccable-sense.com\/c.Da9-6ybr2H5nlNS\/WCQY9DNijjY\/5-OfTlk\/5pOfCI0j2ENojVkp5rOITMkr5O";
-s.async = true;
-s.referrerPolicy = 'no-referrer-when-downgrade';
-l.parentNode.insertBefore(s, l);
-})({})
-</script>
-      {/* This loads the Monetag advertising tag (zone ID 10172587) once the page is interactive */}
+      {/* ✅ Hilltop Ads Script */}
+      <Script
+        id="hilltop-ads"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+            (function(slw){
+              var d = document,
+                  s = d.createElement('script'),
+                  l = d.scripts[d.scripts.length - 1];
+              s.settings = slw || {};
+              s.src = "//impeccable-sense.com/c.Da9-6ybr2H5nlNS/WCQY9DNijjY/5-OfTlk/5pOfCI0j2ENojVkp5rOITMkr5O";
+              s.async = true;
+              s.referrerPolicy = 'no-referrer-when-downgrade';
+              l.parentNode.insertBefore(s, l);
+            })({});
+          `,
+        }}
+      />
+
+      {/* ✅ Monetag Ads Script */}
       <Script
         id="monetag-ads"
         strategy="afterInteractive"
         dangerouslySetInnerHTML={{
           __html: `
-            (function(s){
-              s.dataset.zone='10172587';
-              s.src='https://al5sm.com/tag.min.js';
-            })
-            ([document.documentElement, document.body]
-              .filter(Boolean)
-              .pop()
-              .appendChild(document.createElement('script')));
+            (function(){
+              var d = document,
+                  s = d.createElement('script');
+              s.dataset.zone = '10172587';
+              s.src = 'https://al5sm.com/tag.min.js';
+              s.async = true;
+              d.body.appendChild(s);
+            })();
           `,
         }}
       />
-      {/* ✅ End Monetag Script */}
 
       <Layout>
+        {/* Toasts */}
         <Toaster
           toastOptions={{
             className: "sooner-toast-desktop",
@@ -103,7 +121,11 @@ l.parentNode.insertBefore(s, l);
           }}
           position="top-center"
         />
+
+        {/* Tooltip */}
         <Tooltip id="tooltip" className="react-tooltip" />
+
+        {/* Page Component */}
         <Component {...pageProps} />
       </Layout>
     </>
