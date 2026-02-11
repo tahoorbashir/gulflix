@@ -1,0 +1,12 @@
+#EXTM3U
+
+#EXTINF:-1 tvg-name="Widevine Tears HD" group-title="DRM | Widevine",Widevine Tears HD
+#KODIPROP:inputstream.adaptive.license_type=widevine
+#KODIPROP:inputstream.adaptive.license_key=https://proxy.uat.widevine.com/proxy?provider=widevine_test
+https://storage.googleapis.com/wvmedia/cenc/h264/tears/tears.mpd
+
+
+#EXTINF:-1 tvg-name="Widevine UHD" group-title="DRM | Widevine",Widevine UHD
+#KODIPROP:inputstream.adaptive.license_type=widevine
+#KODIPROP:inputstream.adaptive.license_key=https://proxy.uat.widevine.com/proxy?provider=widevine_test
+https://storage.googleapis.com/wvmedia/cenc/h264/tears/tears_uhd.mpd
